@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <meta name="description" content="Oxem task">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+    <div class="wrapper">
+        <div class="calculator">
+            <h1 class="calculator__title">Рассчитайте стоимость автомобиля в кредит</h1>
+            <div class="calculator__box">
+                <form action="https://eoj3r7f3r4ef6v4.m.pipedream.net" class="calculator__form" >
+                    <div class="calculator__form-box">
+                        <label for="price">Стоимость автомобиля</label>
+                        <div class="calculator__form-input calculator__form-input--price">
+                            <input onkeypress="if(this.value.length&gt;7) return false;" class="input" name="price" id="price" type="number" value="3300000" min="1000000" max="6000000" step="1">
+                            <div class="polzunok-container-2">
+                                <div class="polzunok-2 polzunok-price"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calculator__form-box">
+                    <label for="contrib">Первоначальный взнос</label>
+                        <div class="calculator__form-input calculator__form-input--contrib">
+                            <input class="calculator__form-input-result" name="payFirstMonth" id="perMonth" type="number" value="420000" disabled>
+                            <div class="calculator__form-input-percent">
+                                <input onkeypress="if(this.value.length&gt;2) return false;" name="percent" id="contrib" type="number" class="calculator__form-input--contrib input" value="13" min="10" max="60" step="1">
+                                <span>%</span>
+                            </div>
+                            <div class="polzunok-container-2">
+                                <div class="polzunok-2 polzunok-contrib"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calculator__form-box">
+                    <label for="term">Срок лизинга</label>
+                        <div class="calculator__form-input calculator__form-input--term">
+                            <input onkeypress="if(this.value.length&gt;2) return false;" name="term" id="term" type="number" class="calculator__form-input-term input" value="60" min="1" max="60" step="1">
+                            <div class="polzunok-container-2">
+                                <div class="polzunok-2 polzunok-term" ></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calculator__form-box">
+                        <label for="sum">Сумма договора лизинга</label>
+                        <input type="text" name="sum" id="sum" readonly class="calculator__form-result calculator__form-result--sum" value="4467313₽">
+                    </div>
+                    <div class="calculator__form-box">
+                        <label for="sum">Ежемесячный платеж от</label>
+                        <input type="text" name="payPerMonth" id="pay" readonly class="calculator__form-result calculator__form-result--pay" value="4467313₽">
+                    </div>
+                    <div class="calculator__form-box">
+                        <button type="submit" class="calculator__form-submit">Оставить заявку</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="libs/jquery/dist/jquery.min.js"></script>
+<script src="libs/jquery-ui-dist/jquery-ui.min.js"></script>
+<script src="libs/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+<script src="libs/object-fit-images/dist/ofi.min.js"></script>
+<script src="components.js"></script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+* {
+  outline: none !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper  {
+  padding: 40px 20px;
+}
+
+.calculator {
+
+  &__title {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 90%;
+    color: $black;
+    max-width: 60%;
+    margin-bottom: 32px;
+
+    @media screen and (max-width: 768px) {
+      max-width: 100%;
+    }
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__form-box {
+    width: calc((100% - 64px) / 3);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 45px;
+
+    &.disabled {
+      opacity: 0.5;
+    }
+
+    &:last-child {
+      justify-content: flex-end;
+    }
+
+    label {
+      font-family: 'Gilroy';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: $dark-gray;
+      margin-bottom: 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__form-input {
+    position: relative;
+    background: $gray-3;
+    border-radius: 16px;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 36px;
+    color: $dark-gray;
+    border: none;
+    padding: 0 24px;
+    height: 68px;
+    position: relative;
+    width: 100%;
+
+    input {
+      background: $gray-3;
+      border-radius: 16px;
+      font-family: 'Nekst';
+      font-style: normal;
+      font-weight: 900;
+      font-size: 30px;
+      line-height: 36px;
+      color: $dark-gray;
+      border: none;
+      height: 68px;
+      position: relative;
+      width: 100%;
+
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+
+    &--term {
+      &:after {
+        content: 'мес.';
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 36px;
+        color: $dark-gray;
+        display: inline-block;
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 36px;
+      }
+    }
+
+    &--price {
+      &:after {
+        content: '₽';
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 36px;
+        color: $dark-gray;
+        display: inline-block;
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 36px;
+      }
+    }
+
+    &--contrib {
+      input {
+        width: 40px;
+        //height: 45px;
+        display: flex;
+        position: relative;
+        right: 0;
+        text-align: center;
+      }
+    }
+  }
+
+  &__form-result {
+    border: none;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 49px;
+    color: $dark-gray;
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  &__form-submit {
+    background: $orange;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 36px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 68px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background .325s linear, opacity .325s linear;
+
+    &:not(.loading):hover {
+      background: $black
+    }
+
+    &:not(.loading):focus {
+      background: $dark-gray;
+    }
+  }
+
+  @keyframes loading {
+    from {
+      transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+      }
+  }
+
+  &__form-submit.loading {
+    color: transparent;
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    &:after {
+      content: '';
+      background: transparent;
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      animation: loading 2s infinite;
+      transform-origin: center center;
+      border-radius: 50px;
+    }
+  }
+
+  &__form-input-result {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 36px;
+    color: $dark-gray;
+    position: absolute !important;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0!important;
+    left: 24px !important;
+    width: auto !important;
+    background: transparent !important;
+    text-align: left !important;
+    height: 68px;
+  }
+
+  &__form-input-percent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $gray-2;
+    border-radius: 16px;
+    width: 90px;
+    height: 55px;
+    margin: 7px 0px 7px auto;
+
+    & input {
+      background: transparent;
+    }
+  }
+}
+
+.polzunok-container-2 * {
+  box-sizing: border-box;
+  outline: none;
+}
+.polzunok-container-2 {
+  padding: 10px 0;
+  margin-top: -12px;
+}
+.polzunok-container-2 .ui-slider {
+  position: relative;
+  background: $gray-1;
+  height: 2px;
+  border-radius:10px;
+  //box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), 1px 1px 5px rgba(255, 255, 255, 1);
+}
+.polzunok-container-2 .ui-slider .ui-slider-handle {
+  position: absolute;
+  text-align: center;
+  width: 16px;
+  height: 16px;
+  font-size: 18px;
+  line-height: 18px;
+  padding-top: 4px;
+  cursor: pointer;
+  border-radius: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: $orange;
+  z-index: 2;
+  color: #000;
+  //box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+}
+.polzunok-container-2 .ui-slider .ui-slider-handle b {
+  padding: 0 8px;
+  font-family: Courier, monospace;
+  color: #BFE2FF;
+}
+.polzunok-container-2 .ui-slider .ui-slider-handle:hover b {
+  color: #337AB7;
+}
+.polzunok-container-2 .ui-slider .ui-slider-range {
+  position: absolute;
+  z-index: 1;
+  height: 2px;
+  display: block;
+  border: 0;
+  background: $orange;
+  border-radius:10px;
+}
+.polzunok-container-2 .ui-slider-horizontal .ui-slider-range-min {
+  left: 0;
+}
+.polzunok-container-2 .ui-slider-horizontal .ui-slider-range-max {
+  right: 0;
+}
