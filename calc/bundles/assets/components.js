@@ -32,27 +32,27 @@ var calculating = function calculating() {
     setTimeout(function () {
         var $percent = $('#contrib').val();
         var $price = $('#price').val();
-
         var $pay = $price / 100 * $percent;
         var $term = $('#term').val();
-
         var $stavka = (($price - $pay) * (0.035 * Math.pow(1 + 0.035, $term) / (Math.pow(1 + 0.035, $term) - 1))).toFixed(0);
-
         var $sum = ($pay + $term * $stavka).toFixed(0);
+
         $('#sum').val($sum + '₽');
         $('#pay').val($stavka + '₽');
-        $('#perMonth').val($pay.toFixed(0));
+        $('#perMonth').val($pay.toFixed(0) + '₽');
     }, 0);
 };
 
 var minMax = function minMax() {
-    var inputs = document.querySelectorAll('input[type=number]');
-    Array.from(inputs).forEach(function (input) {
+    var inputs = $('input[type=number]');
+    console.log(inputs);
+    $.each(inputs, function (index, input) {
         var min = +input.min;
         var max = +input.max;
 
         $(input).on('blur', function (e) {
             var value = +input.value;
+
             if (value > max) {
                 input.value = max;
             } else if (value < min) {

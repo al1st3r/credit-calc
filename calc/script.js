@@ -29,27 +29,27 @@ let calculating = function() {
     setTimeout(function () {
         let $percent = $('#contrib').val();
         let $price = $('#price').val();
-
         let $pay = $price / 100 * $percent
         let $term = $('#term').val();
-
         let $stavka = (($price - $pay) * ((0.035 * Math.pow((1 + 0.035), $term)) / (Math.pow((1 + 0.035), $term) - 1))).toFixed(0);
-
         let $sum = ($pay + $term * $stavka).toFixed(0)
+
         $('#sum').val($sum + '₽')
         $('#pay').val($stavka + '₽')
-        $('#perMonth').val($pay.toFixed(0))
+        $('#perMonth').val($pay.toFixed(0) + '₽')
     }, 0)
 }
 
 let minMax = function () {
-    const inputs = document.querySelectorAll('input[type=number]');
-    Array.from(inputs).forEach(input => {
+    const inputs = $('input[type=number]');
+    console.log(inputs)
+    $.each(inputs, function(index, input) {
         const min = +input.min;
         const max = +input.max;
 
         $(input).on('blur', (e) => {
             const value = +input.value;
+
             if (value > max) { input.value = max }
             else if (value < min) { input.value = min }
         });
