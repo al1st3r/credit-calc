@@ -1,5 +1,5 @@
 let initRange = function() {
-  $('.polzunok-2').each(function () {
+  $('.range-slider').each(function () {
     $(this).slider({
         min: +$(this).parents('.calculator__form-box').find('input.input').attr('min'),
         max: +$(this).parents('.calculator__form-box').find('input.input').attr('max'),
@@ -31,18 +31,17 @@ let calculating = function() {
         let $price = $('#price').val();
         let $pay = $price / 100 * $percent
         let $term = $('#term').val();
-        let $stavka = (($price - $pay) * ((0.035 * Math.pow((1 + 0.035), $term)) / (Math.pow((1 + 0.035), $term) - 1))).toFixed(0);
-        let $sum = ($pay + $term * $stavka).toFixed(0)
+        let $bet = (($price - $pay) * ((0.035 * Math.pow((1 + 0.035), $term)) / (Math.pow((1 + 0.035), $term) - 1))).toFixed(0);
+        let $sum = ($pay + $term * $bet).toFixed(0)
 
         $('#sum').val($sum + '₽')
-        $('#pay').val($stavka + '₽')
+        $('#pay').val($bet + '₽')
         $('#perMonth').val($pay.toFixed(0) + '₽')
     }, 0)
 }
 
 let minMax = function () {
     const inputs = $('input[type=number]');
-    console.log(inputs)
     $.each(inputs, function(index, input) {
         const min = +input.min;
         const max = +input.max;
@@ -56,9 +55,18 @@ let minMax = function () {
     });
 }
 
+let formAfterSubmit = function (message) {
+    $('.calculator__form-submit').removeClass('loading').text(message)
+    $('input.input').attr('readonly', false)
+    $('.calculator__form-box').removeClass('disabled')
+    setTimeout(function () {
+        $('.calculator__form-submit').text('Оставить заявку')
+    }, 3000)
+}
+
 $('.calculator__form').submit(function (e) {
     e.preventDefault();
-    console.log( $(this).serialize() );
+    console.log($(this).serialize());
     $('.calculator__form-submit').addClass('loading')
     $('input.input').attr('readonly', true)
     $('.calculator__form-box').addClass('disabled')
@@ -70,26 +78,12 @@ $('.calculator__form').submit(function (e) {
             async: false,
             contentType: 'application/json',
             dataType: 'json',
-            success: function () {
-                $('.calculator__form-submit').removeClass('loading').text('Успешно!')
-                $('input.input').attr('readonly', false)
-                $('.calculator__form-box').removeClass('disabled')
-                setTimeout(function () {
-                    $('.calculator__form-submit').text('Оставить заявку')
-
-                }, 3000)
+            success: function() {
+                formAfterSubmit('Успешно')
             },
-            error: function () {
-                $('.calculator__form-submit').removeClass('loading').text('Ошибка')
-                $('input.input').attr('readonly', false)
-                $('.calculator__form-box').removeClass('disabled')
-                setTimeout(function () {
-                    $('.calculator__form-submit').text('Оставить заявку')
-
-                }, 3000)
-            }
+            error: function() {
+                formAfterSubmit('Ошибка')
+            },
         })
     }, 1000)
-
 })
-

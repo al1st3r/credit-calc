@@ -1,7 +1,7 @@
 'use strict';
 
 var initRange = function initRange() {
-    $('.polzunok-2').each(function () {
+    $('.range-slider').each(function () {
         $(this).slider({
             min: +$(this).parents('.calculator__form-box').find('input.input').attr('min'),
             max: +$(this).parents('.calculator__form-box').find('input.input').attr('max'),
@@ -34,18 +34,17 @@ var calculating = function calculating() {
         var $price = $('#price').val();
         var $pay = $price / 100 * $percent;
         var $term = $('#term').val();
-        var $stavka = (($price - $pay) * (0.035 * Math.pow(1 + 0.035, $term) / (Math.pow(1 + 0.035, $term) - 1))).toFixed(0);
-        var $sum = ($pay + $term * $stavka).toFixed(0);
+        var $bet = (($price - $pay) * (0.035 * Math.pow(1 + 0.035, $term) / (Math.pow(1 + 0.035, $term) - 1))).toFixed(0);
+        var $sum = ($pay + $term * $bet).toFixed(0);
 
         $('#sum').val($sum + '₽');
-        $('#pay').val($stavka + '₽');
+        $('#pay').val($bet + '₽');
         $('#perMonth').val($pay.toFixed(0) + '₽');
     }, 0);
 };
 
 var minMax = function minMax() {
     var inputs = $('input[type=number]');
-    console.log(inputs);
     $.each(inputs, function (index, input) {
         var min = +input.min;
         var max = +input.max;
@@ -60,6 +59,15 @@ var minMax = function minMax() {
             }
         });
     });
+};
+
+var formAfterSubmit = function formAfterSubmit(message) {
+    $('.calculator__form-submit').removeClass('loading').text(message);
+    $('input.input').attr('readonly', false);
+    $('.calculator__form-box').removeClass('disabled');
+    setTimeout(function () {
+        $('.calculator__form-submit').text('Оставить заявку');
+    }, 3000);
 };
 
 $('.calculator__form').submit(function (e) {
@@ -77,20 +85,10 @@ $('.calculator__form').submit(function (e) {
             contentType: 'application/json',
             dataType: 'json',
             success: function success() {
-                $('.calculator__form-submit').removeClass('loading').text('Успешно!');
-                $('input.input').attr('readonly', false);
-                $('.calculator__form-box').removeClass('disabled');
-                setTimeout(function () {
-                    $('.calculator__form-submit').text('Оставить заявку');
-                }, 3000);
+                formAfterSubmit('Успешно');
             },
             error: function error() {
-                $('.calculator__form-submit').removeClass('loading').text('Ошибка');
-                $('input.input').attr('readonly', false);
-                $('.calculator__form-box').removeClass('disabled');
-                setTimeout(function () {
-                    $('.calculator__form-submit').text('Оставить заявку');
-                }, 3000);
+                formAfterSubmit('Ошибка');
             }
         });
     }, 1000);
